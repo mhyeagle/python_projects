@@ -31,7 +31,7 @@ def main():
 
     try:
         # 预处理图像
-        input_data = preprocess("/Users/beeman/triton_inference_learn/img2.jpg")
+        input_data = preprocess("img2.jpg")
         print(f"Input shape: {input_data.shape}, dtype: {input_data.dtype}")  # 调试信息
 
         # 构造请求
