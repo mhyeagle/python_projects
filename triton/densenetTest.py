@@ -24,6 +24,8 @@ def preprocess(img_path):
     assert img.dtype == np.float32, f"Expected float32 but got {img.dtype}"
     return img
 
+def print_response(response):
+    print("response:", response.as_numpy("class_logits"))
 
 def main():
     # 连接Triton服务器
@@ -42,6 +44,8 @@ def main():
 
         # 发送推理请求
         response = client.infer(model_name="densenet_onnx", inputs=inputs, outputs=outputs)
+        print_response(response)
+
         logits = response.as_numpy("class_logits")
 
         # 后处理
