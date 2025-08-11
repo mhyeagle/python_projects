@@ -5,7 +5,8 @@ import tritonclient.grpc as grpcclient
 # Triton server 地址
 TRITON_URL = "localhost:8000"
 TRITON_GRPC = "localhost:8001"
-MODEL_NAME = "gr_youmightlike_xgb"
+# MODEL_NAME = "gr_youmightlike_xgb"
+MODEL_NAME = "gn_sjtjs_xgb"
 
 # 创建 HTTP 客户端
 # client = httpclient.InferenceServerClient(url=TRITON_URL)
@@ -14,7 +15,7 @@ client = grpcclient.InferenceServerClient(url=TRITON_GRPC)
 # 构造输入数据 (batch=2, feature=514)
 # 这里用随机数据，你可以换成自己的特征
 batch_size = 2
-feature_size = 514
+feature_size = 455
 input_data = np.random.rand(batch_size, feature_size).astype(np.float32)
 
 # http 创建输入对象

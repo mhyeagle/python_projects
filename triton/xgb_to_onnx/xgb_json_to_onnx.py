@@ -7,6 +7,14 @@ import os
 import onnxruntime as ort
 import numpy as np
 
+
+def serialize_model_to_json(json_path):
+    booster = xgb.Booster()
+    booster.load_model(json_path)  # 支持 JSON 格式
+    booster.save_model("model.json")
+    booster.save_model("model.ubj")
+    print(f"已成功保存 JSON 模型到：model.json")
+
 def json_to_onnx(json_path, onnx_path, n_features):
     booster = xgb.Booster()
     booster.load_model(json_path)  # 支持 JSON 格式
@@ -27,6 +35,11 @@ def test_run(onnx_path, n_features):
     print("推理输出:", output)
 
 if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        json_file = sys.argv[1]
+        serialize_model_to_json(json_file)
+        sys.exit(0)
+
     if len(sys.argv) < 4 or len(sys.argv) > 5:
         print("用法: python json_to_onnx.py 模型.json 输出.onnx 特征数 isTest")
         sys.exit(1)
